@@ -16,6 +16,10 @@ namespace ViridiumBuff
 
         public override void OnLateInitializeMelon()
         {
+            if (!NetworkSceneManager.IsServer)
+            {
+                return;
+            }
             PhysicalMaterial physicalMaterial_viridium = PhysicalMaterial.All.Where(mat => mat.Hash == 16222u).First();
             typeof(PhysicalMaterial).GetField("damageMultiplier", BindingFlags.Instance | BindingFlags.NonPublic).SetValue(physicalMaterial_viridium, 2f);
             typeof(PhysicalMaterial).GetField("durabilityMultiplier", BindingFlags.Instance | BindingFlags.NonPublic).SetValue(physicalMaterial_viridium, 4.5f);
